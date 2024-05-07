@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
-public class CustomSubscription<T> implements Flow.Subscription {
+public class SimpleSubscription<T> implements Flow.Subscription {
 
     private final Flow.Subscriber<? super T> subscriber;
     private final Function<Flow.Subscription, Boolean> unsubscribe;
@@ -20,7 +20,7 @@ public class CustomSubscription<T> implements Flow.Subscription {
     private final List<T> source;
     private final ExecutorService threadPool;
 
-    public CustomSubscription(Flow.Subscriber<? super T> subscriber,
+    public SimpleSubscription(Flow.Subscriber<? super T> subscriber,
                               Function<Flow.Subscription, Boolean> doUnsubscribe,
                               List<T> source, ExecutorService threadPool) {
         this.subscriber = subscriber;
@@ -69,7 +69,7 @@ public class CustomSubscription<T> implements Flow.Subscription {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomSubscription<?> that = (CustomSubscription<?>) o;
+        SimpleSubscription<?> that = (SimpleSubscription<?>) o;
         return Objects.equals(subscriber, that.subscriber);
     }
 

@@ -1,6 +1,6 @@
 package com.tedeevgv.reactive.streams.publisher;
 
-import com.tedeevgv.reactive.streams.subscription.CustomSubscription;
+import com.tedeevgv.reactive.streams.subscription.SimpleSubscription;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -24,7 +24,7 @@ public class SimplePublisher<T> extends PublisherWithOperators<T> implements Aut
 
     @Override
     public void subscribe(Flow.Subscriber<? super T> subscriber) {
-        var subscription = new CustomSubscription<>(subscriber, doUnsubscribe, source, threadPool);
+        var subscription = new SimpleSubscription<>(subscriber, doUnsubscribe, source, threadPool);
         subscriptions.add(subscription);
 
         subscriber.onSubscribe(subscription);
