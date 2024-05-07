@@ -1,7 +1,7 @@
-package com.tedeevgv.reactive.streams;
+package com.georgetedeev.reactive.streams;
 
-import com.tedeevgv.reactive.streams.publisher.SimplePublisher;
-import com.tedeevgv.reactive.streams.subscriber.SimpleSubscriber;
+import com.georgetedeev.reactive.streams.publisher.SimplePublisher;
+import com.georgetedeev.reactive.streams.subscriber.SimpleSubscriber;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;

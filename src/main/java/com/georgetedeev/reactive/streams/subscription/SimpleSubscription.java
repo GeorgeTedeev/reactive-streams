@@ -1,4 +1,4 @@
-package com.tedeevgv.reactive.streams.subscription;
+package com.georgetedeev.reactive.streams.subscription;
 
 import java.util.Collections;
 import java.util.List;

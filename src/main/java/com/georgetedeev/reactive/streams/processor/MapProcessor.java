@@ -1,27 +1,26 @@
-package com.tedeevgv.reactive.streams.processor;
+package com.georgetedeev.reactive.streams.processor;
 
-import com.tedeevgv.reactive.streams.subscription.ProcessorSubscription;
+import com.georgetedeev.reactive.streams.subscription.ProcessorSubscription;
 
 import java.util.concurrent.Flow;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.util.function.Function;
 
-public class FilterProcessor<T> extends ProcessorWithOperators<T, T> {
+public class MapProcessor<T, R> extends ProcessorWithOperators<T, R> {
     private Flow.Subscription subscriptionAsSubscriber;
-    private Flow.Subscriber<? super T> subscriberAsPublisher;
-    private final Predicate<T> predicate;
+    private Flow.Subscriber<? super R> subscriberAsPublisher;
+    private final Function<T, R> converter;
     private final Consumer<Flow.Subscriber<? super T>> doSubscribe;
-    private final String processorName = "filter";
+    private final String processorName = "map";
 
-    public FilterProcessor(Predicate<T> predicate,
-                           Consumer<Flow.Subscriber<? super T>> doSubscribe) {
-        this.predicate = predicate;
+    public MapProcessor(Function<T, R> converter,
+                        Consumer<Flow.Subscriber<? super T>> doSubscribe) {
+        this.converter = converter;
         this.doSubscribe = doSubscribe;
     }
 
-
     @Override
-    public void subscribe(Flow.Subscriber<? super T> subscriber) {
+    public void subscribe(Flow.Subscriber<? super R> subscriber) {
         doSubscribe.accept(this);
 
         this.subscriberAsPublisher = subscriber;
@@ -40,9 +39,7 @@ public class FilterProcessor<T> extends ProcessorWithOperators<T, T> {
     public void onNext(T item) {
         System.out.println("Processor with name '" + processorName + "' received data: " + item);
 
-        if (predicate.test(item)) {
-            subscriberAsPublisher.onNext(item);
-        }
+        subscriberAsPublisher.onNext(this.converter.apply(item));
     }
 
     @Override
@@ -54,5 +51,4 @@ public class FilterProcessor<T> extends ProcessorWithOperators<T, T> {
     public void onComplete() {
         subscriberAsPublisher.onComplete();
     }
-
 }

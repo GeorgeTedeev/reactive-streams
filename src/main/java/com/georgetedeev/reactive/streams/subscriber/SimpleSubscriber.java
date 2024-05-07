@@ -1,4 +1,4 @@
-package com.tedeevgv.reactive.streams.subscriber;
+package com.georgetedeev.reactive.streams.subscriber;
 
 import java.util.concurrent.Flow;
 

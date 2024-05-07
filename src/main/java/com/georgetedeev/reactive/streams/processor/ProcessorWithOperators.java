@@ -1,6 +1,6 @@
-package com.tedeevgv.reactive.streams.processor;
+package com.georgetedeev.reactive.streams.processor;
 
-import com.tedeevgv.reactive.streams.publisher.PublisherWithOperators;
+import com.georgetedeev.reactive.streams.publisher.PublisherWithOperators;
 
 import java.util.concurrent.Flow;
 

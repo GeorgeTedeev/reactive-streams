@@ -1,7 +1,7 @@
-package com.tedeevgv.reactive.streams.publisher;
+package com.georgetedeev.reactive.streams.publisher;
 
-import com.tedeevgv.reactive.streams.processor.FilterProcessor;
-import com.tedeevgv.reactive.streams.processor.MapProcessor;
+import com.georgetedeev.reactive.streams.processor.FilterProcessor;
+import com.georgetedeev.reactive.streams.processor.MapProcessor;
 
 import java.util.concurrent.Flow;
 import java.util.function.Consumer;

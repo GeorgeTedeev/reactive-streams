@@ -1,26 +1,27 @@
-package com.tedeevgv.reactive.streams.processor;
+package com.georgetedeev.reactive.streams.processor;
 
-import com.tedeevgv.reactive.streams.subscription.ProcessorSubscription;
+import com.georgetedeev.reactive.streams.subscription.ProcessorSubscription;
 
 import java.util.concurrent.Flow;
 import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
-public class MapProcessor<T, R> extends ProcessorWithOperators<T, R> {
+public class FilterProcessor<T> extends ProcessorWithOperators<T, T> {
     private Flow.Subscription subscriptionAsSubscriber;
-    private Flow.Subscriber<? super R> subscriberAsPublisher;
-    private final Function<T, R> converter;
+    private Flow.Subscriber<? super T> subscriberAsPublisher;
+    private final Predicate<T> predicate;
     private final Consumer<Flow.Subscriber<? super T>> doSubscribe;
-    private final String processorName = "map";
+    private final String processorName = "filter";
 
-    public MapProcessor(Function<T, R> converter,
-                        Consumer<Flow.Subscriber<? super T>> doSubscribe) {
-        this.converter = converter;
+    public FilterProcessor(Predicate<T> predicate,
+                           Consumer<Flow.Subscriber<? super T>> doSubscribe) {
+        this.predicate = predicate;
         this.doSubscribe = doSubscribe;
     }
 
+
     @Override
-    public void subscribe(Flow.Subscriber<? super R> subscriber) {
+    public void subscribe(Flow.Subscriber<? super T> subscriber) {
         doSubscribe.accept(this);
 
         this.subscriberAsPublisher = subscriber;
@@ -39,7 +40,9 @@ public class MapProcessor<T, R> extends ProcessorWithOperators<T, R> {
     public void onNext(T item) {
         System.out.println("Processor with name '" + processorName + "' received data: " + item);
 
-        subscriberAsPublisher.onNext(this.converter.apply(item));
+        if (predicate.test(item)) {
+            subscriberAsPublisher.onNext(item);
+        }
     }
 
     @Override
@@ -51,4 +54,5 @@ public class MapProcessor<T, R> extends ProcessorWithOperators<T, R> {
     public void onComplete() {
         subscriberAsPublisher.onComplete();
     }
+
 }

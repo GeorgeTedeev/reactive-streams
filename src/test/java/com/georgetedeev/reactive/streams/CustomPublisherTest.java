@@ -1,6 +1,6 @@
-package com.tedeevgv.reactive.streams;
+package com.georgetedeev.reactive.streams;
 
-import com.tedeevgv.reactive.streams.publisher.SimplePublisher;
+import com.georgetedeev.reactive.streams.publisher.SimplePublisher;
 import org.reactivestreams.FlowAdapters;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.tck.PublisherVerification;

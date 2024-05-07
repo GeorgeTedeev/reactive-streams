@@ -1,6 +1,6 @@
-package com.tedeevgv.reactive.streams.publisher;
+package com.georgetedeev.reactive.streams.publisher;
 
-import com.tedeevgv.reactive.streams.subscription.SimpleSubscription;
+import com.georgetedeev.reactive.streams.subscription.SimpleSubscription;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
