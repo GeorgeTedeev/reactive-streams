@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.tedeevgv'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.reactivestreams:reactive-streams:1.0.4'
+    testImplementation 'org.reactivestreams:reactive-streams-tck:1.0.4'
+
+    testImplementation 'org.testng:testng:7.9.0'
+
+}
+
+test {
+    useTestNG()
+}
